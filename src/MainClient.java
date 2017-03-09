@@ -6,7 +6,7 @@ import java.io.*;
  */
 public class MainClient {
 
-    public void main(String[] args)
+    public static void main(String[] args)
     {
         int port = 50000;
         Socket socket;

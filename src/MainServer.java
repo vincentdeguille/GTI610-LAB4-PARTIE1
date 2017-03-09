@@ -7,7 +7,7 @@ import java.io.*;
 
 public class MainServer {
 
-    public void main(String[] args)
+    public static void main(String[] args)
     {
         int port = 50000;
         ServerSocket serveur;
@@ -15,7 +15,7 @@ public class MainServer {
         try
         {
             serveur = new ServerSocket(port);
-            System.out.println("Le serveur est demarre e : " + serveur);
+            System.out.println("Le serveur est demarre a : " + serveur.getLocalSocketAddress());
 
             //Boucle qui attend une connexion tant et aussi longtemps
             //que le serveur est démarré.
