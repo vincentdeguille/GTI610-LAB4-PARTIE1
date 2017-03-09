@@ -2,39 +2,38 @@
  * Created by Vincent De Guille on 2017-03-02.
  */
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.*;
+import java.net.*;
 
 public class AppServer {
 
-    public void server()
+    public void receptionRequeteClient(Socket socket)
     {
-        int port = 50000;
-
-        ServerSocket serveur;
-
         try
         {
-            serveur = new ServerSocket(port);
+            BufferedReader lecteurSocket;
+            BufferedWriter ecritureSocket;
+            InputStreamReader lecteurStream = new InputStreamReader(socket.getInputStream());
+            OutputStreamWriter ecritureStream = new OutputStreamWriter(socket.getOutputStream());
 
-            Socket connexionSocket = serveur.accept();
+            lecteurSocket = new BufferedReader(lecteurStream);
+            ecritureSocket = new BufferedWriter(ecritureStream);
 
-            String data = "Hello from server";
-            OutputStream out = connexionSocket.getOutputStream();
-            out.write(data.getBytes());
+            String messageRecu = null;
+            while((messageRecu = lecteurSocket.readLine()) != null)
+            {
+                System.out.println("Message recu : " + messageRecu + "; Adresse IP du client : " + socket.getInetAddress() + "; Port du client" + socket.getLocalPort());
+                String messageSorti = messageRecu.toUpperCase();
+                ecritureSocket.write(messageSorti + "\\n");
+                ecritureSocket.flush();
+            }
 
-            connexionSocket.close();
-            serveur.close();
-
+            socket.close();
         }
         catch(IOException e)
         {
             e.printStackTrace();
         }
     }
-
-
 
 }

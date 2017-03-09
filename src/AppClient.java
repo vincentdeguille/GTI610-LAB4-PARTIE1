@@ -2,11 +2,8 @@
  * Created by Vincent De Guille on 2017-03-02.
  */
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.ServerSocket;
+import java.io.*;
+import java.net.*;
 
 public class AppClient {
 
@@ -20,8 +17,10 @@ public class AppClient {
 
             byte[] buff = new byte[MAXLENGTH];
 
-            InputStream in = clientSocket.getInputStream();
-            in.read(buff);
+            InputStream serverInput = clientSocket.getInputStream();
+            serverInput.read(buff);
+
+            PrintStream output = new PrintStream(clientSocket.getOutputStream());
 
             clientSocket.close();
         }
