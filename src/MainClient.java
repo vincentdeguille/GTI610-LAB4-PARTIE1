@@ -30,10 +30,10 @@ public class MainClient {
                 InputStreamReader lecteurSysteme = new InputStreamReader(System.in);
                 BufferedReader lecteurConsole = new BufferedReader(lecteurSysteme);
 
-                String demandeConsole = "Entrez votre message a envoyé (Quitter pour fermer) : ";
+                String demandeConsole = "Entrez votre message a envoyer (Quitter pour fermer) : ";
                 String messageSorti = null;
 
-                while((messageSorti = lecteurConsole.readLine()) != null)
+                while((messageSorti = lecteurConsole.readLine()) != null || (messageSorti = lecteurConsole.readLine()).equals(""))
                 {
                     if(messageSorti.equalsIgnoreCase("quitter"))
                     {
@@ -41,7 +41,7 @@ public class MainClient {
                         break;
                     }
 
-                    ecritureSocket.write(messageSorti + "\\n");
+                    ecritureSocket.write(messageSorti + "\n");
                     ecritureSocket.flush();
 
                     String messageRecu = lecteurSocket.readLine();

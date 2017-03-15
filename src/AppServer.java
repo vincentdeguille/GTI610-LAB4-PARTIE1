@@ -24,7 +24,7 @@ public class AppServer {
             {
                 System.out.println("Message recu : " + messageRecu + "; Adresse IP du client : " + socket.getInetAddress() + "; Port du client" + socket.getLocalPort());
                 String messageSorti = messageRecu.toUpperCase();
-                ecritureSocket.write(messageSorti + "\\n");
+                ecritureSocket.write(messageSorti + "\n");
                 ecritureSocket.flush();
             }
 
